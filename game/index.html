@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tidebound — Duel of the Deep Current</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">TIDEBOUND <span>· Duel of the Deep Current</span></div>
+    <div class="favour-track" aria-label="Favour">
+      <span class="favour-label">FAVOUR</span>
+      <span class="favour-num" id="favour-you">0</span>
+      <span class="favour-bar"><span id="favour-fill"></span></span>
+      <span class="favour-goal">15</span>
+      <span class="favour-bar rival"><span id="favour-fill-rival"></span></span>
+      <span class="favour-num" id="favour-rival">0</span>
+      <span class="favour-label">RILL</span>
+    </div>
+    <div class="hull-box">
+      <span class="hull-label">YOU ♥ <b id="hull-num-you">16</b></span>
+      <span class="hull-bar"><span id="hull-fill-you"></span></span>
+      <span class="hull-label">RILL ♥ <b id="hull-num-rival">16</b></span>
+      <span class="hull-bar"><span id="hull-fill-rival"></span></span>
+    </div>
+    <div class="top-actions">
+      <span id="hand-label">Hand 1</span>
+      <button id="sound-btn" type="button">🔊 Sound on</button>
+    </div>
+  </header>
+
+  <section id="rival-zone">
+    <div class="rival-id"><span id="rival-name">Rill — Tidecaller of the Deep</span>
+      <span id="rival-count">5 cards</span></div>
+    <div id="rival-backs"></div>
+    <div class="rival-side">
+      <div class="surge-wrap"><span class="surge-label">SURGE</span><span id="surge-rival" class="surge-orbs"></span><b id="surge-num-rival">2</b></div>
+      <div id="rival-tidecaller" class="tidecaller-chip held">◎ Tidecaller held</div>
+    </div>
+  </section>
+
+  <div id="intent-banner" role="status"></div>
+  <div id="current-arrow">Current flows → toward the Deep</div>
+
+  <main id="lanes">
+    <div class="lane" data-lane="0">
+      <div class="lane-head"><span class="lane-glyph" style="color:#e8c15a">〰</span>
+        <span class="lane-name">Sunlit Shallows</span><span class="lane-value">★ 1</span>
+        <span class="lane-totals"><b class="lane-total-rival">0</b> : <b class="lane-total-you">0</b></span></div>
+      <div class="lane-row rival"></div>
+      <div class="lane-row you"></div>
+    </div>
+    <div class="lane" data-lane="1">
+      <div class="lane-head"><span class="lane-glyph" style="color:#2fbfae">◎</span>
+        <span class="lane-name">Mid Current</span><span class="lane-value">★ 2</span>
+        <span class="lane-totals"><b class="lane-total-rival">0</b> : <b class="lane-total-you">0</b></span></div>
+      <div class="lane-row rival"></div>
+      <div class="lane-row you"></div>
+    </div>
+    <div class="lane" data-lane="2">
+      <div class="lane-head"><span class="lane-glyph" style="color:#9b7bff">▽</span>
+        <span class="lane-name">Deep Trench</span><span class="lane-value">★ 3</span>
+        <span class="lane-totals"><b class="lane-total-rival">0</b> : <b class="lane-total-you">0</b></span></div>
+      <div class="lane-row rival"></div>
+      <div class="lane-row you"></div>
+    </div>
+  </main>
+
+  <div id="table-message" role="status">Your move — click a card, then a lane.</div>
+
+  <section id="player-zone">
+    <div class="player-side">
+      <div class="surge-wrap"><span class="surge-label">YOUR SURGE</span><span id="surge-you" class="surge-orbs"></span><b id="surge-num-you">2</b></div>
+      <div id="you-tidecaller" class="tidecaller-chip held">◎ Tidecaller held</div>
+      <div class="player-actions">
+        <button id="bank-btn" type="button">Bank a card (+2 Surge)</button>
+        <button id="pass-btn" type="button">Pass</button>
+      </div>
+    </div>
+    <div id="player-hand"></div>
+    <div class="keys-hint">Keys: 1–5 select · ← → lane · Enter play · B bank · P pass</div>
+  </section>
+
+  <div id="title-screen" class="overlay">
+    <div class="title-inner">
+      <div class="title-kicker">A DUEL ON THE DEEP CURRENT</div>
+      <h1 class="title-name">TIDEBOUND</h1>
+      <p class="title-rule">Win 2 of 3 lanes when the tide turns — first to 15 favour, or sink the rival’s hull.</p>
+      <p class="title-sub">Play cards into the Shallows, the Mid Current and the Deep Trench. Sail fleets ride the
+        current, Hooks drag rivals down-lane, Floods swell a whole lane — and the Tidecaller flips the sea itself.</p>
+      <div class="title-hand" aria-hidden="true">
+        <div class="card fam-sail"><div class="card-top"><span class="card-str">3</span><span class="card-cost"><span class="pip on">●</span><span class="pip">●</span><span class="pip">●</span></span></div><div class="card-glyph" style="color:#f5b942">▲</div><div class="card-name">Skiff</div><div class="card-fam">Sail</div><div class="card-text">Fleet: +1 with a Sail next door.</div></div>
+        <div class="card fam-hook"><div class="card-top"><span class="card-str">2</span><span class="card-cost"><span class="pip on">●</span><span class="pip">●</span><span class="pip">●</span></span></div><div class="card-glyph" style="color:#ff6b5e">⚓</div><div class="card-name">Grapnel Hook</div><div class="card-fam">Hook</div><div class="card-text">Drag the strongest rival card toward the Shallows.</div></div>
+        <div class="card fam-flood"><div class="card-top"><span class="card-str">1</span><span class="card-cost"><span class="pip on">●</span><span class="pip on">●</span><span class="pip">●</span></span></div><div class="card-glyph" style="color:#3ec6e8">〰</div><div class="card-name">Floodtide</div><div class="card-fam">Flood</div><div class="card-text">Your cards in this lane gain +2.</div></div>
+        <div class="card fam-tide"><div class="card-top"><span class="card-str">6</span><span class="card-cost"><span class="pip on">●</span><span class="pip on">●</span><span class="pip on">●</span></span></div><div class="card-glyph" style="color:#b78cff">◎</div><div class="card-name">Tidecaller</div><div class="card-fam">Tide</div><div class="card-text">Flip the current. Once per game.</div></div>
+      </div>
+      <div class="title-buttons">
+        <button id="play-btn" type="button" class="primary">⚓ Set Sail — Play</button>
+        <button id="howto-btn" type="button">How to Play</button>
+      </div>
+      <p class="title-foot">You are the Shorebound. Rill, Tidecaller of the Deep, is waiting. Mouse or keyboard — no account, no network, just the sea.</p>
+    </div>
+  </div>
+
+  <div id="howto" class="overlay hidden">
+    <div class="howto-inner">
+      <h2>How to Play</h2>
+      <ol>
+        <li><b>Each hand, play 4 cards.</b> Click a card, then click a lane — or keys 1–5, ← →, Enter.</li>
+        <li><b>Cards cost Surge.</b> You start with 2, gain +1 a turn, or bank a card for +2. Rill’s Surge is always visible.</li>
+        <li><b>When the tide turns, lanes score.</b> Higher strength takes the lane’s favour (Shallows 1, Mid 2, Deep 3). Win a lane by 4+ and the loser’s hull takes the excess as damage.</li>
+        <li><b>Combos:</b> Sails in neighbouring lanes give each other +1 (fleet). Cards downstream of a friendly card gain +1 (riding the current). Floodtide gives a whole lane +2; Undertow takes 2 from the rival lane. Hooks drag a rival card toward the Shallows.</li>
+        <li><b>The Tidecaller</b> (cost 3, strength 6) flips the current — once per game, and both sides can see it coming.</li>
+        <li><b>Win</b> at 15 favour, or by sinking Rill’s hull to 0.</li>
+      </ol>
+      <button id="howto-close" type="button" class="primary">Back to the Sea</button>
+    </div>
+  </div>
+
+  <div id="end-screen" class="overlay hidden">
+    <div class="end-inner">
+      <h1 id="end-title">VICTORY</h1>
+      <p id="end-sub"></p>
+      <p id="end-score"></p>
+      <p id="end-detail"></p>
+      <button id="again-btn" type="button" class="primary">⚓ Sail Again</button>
+    </div>
+  </div>
+
+  <div id="fx-layer"></div>
+  <p id="status" role="status" aria-live="polite"></p>
+</div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
