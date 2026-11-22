@@ -139,7 +139,7 @@ button:disabled { opacity: 0.4; cursor: default; }
 .card.in-lane .card-str { font-size: 22px; }
 .card.in-lane .card-cost, .card.in-lane .card-fam, .card.in-lane .card-text { display: none; }
 .card.in-lane .card-glyph { font-size: 19px; margin-top: 0; }
-.card.in-lane .card-name { font-size: 12px; margin-top: 0; }
+.card.in-lane .card-name { font-size: 12px; margin-top: 0; flex-shrink: 0; padding-right: 26px; }
 .card.mid-slide { transform: translateY(12px) rotate(3deg) scale(1.06); box-shadow: 0 14px 26px rgba(0, 0, 0, 0.6), 0 0 0 2px #ffe9a8; z-index: 5; }
 
 /* --- player zone: hand --- */
